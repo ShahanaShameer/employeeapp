@@ -1,0 +1,102 @@
+
+    
+
+<div class="section">
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Add Employee Details Here</h4>
+        </div>
+        <div class="col ml-auto text-right">
+            <button type="button" class="btn btn btn-success" (click)="onAddEmployee()">Add Employee</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of employees">
+            <div class="card mb-3 shadow p-3 mb-5   rounded" style="background-color: #e0f4fe;" >
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{item.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Position: {{item.position}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Company Name: {{item.companyname}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Salary: {{item.Salary}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Department: {{item.dept}}</h6>
+                    <hr>
+                    <button type="button" class="btn btn-sm btn btn-primary mr-2" (click)="onEditEmployee(item)">Edit</button>
+                    <button type="button" class="btn btn-sm btn btn-danger" (click)="onDeleteEmployee(item._id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade show" [class.show]="showModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{editMode? 'Update' :'Add'}} Employee</h5>
+                <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="empForm" (ngSubmit)="onEmpSubmit()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Enter Name</label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="name">
+                        <small *ngIf="!empForm.get('name').valid && empForm.get('name').touched" class="form-text text-danger">Please Enter Name.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter position</label>
+                        <input type="text" class="form-control" formControlName="position" placeholder="position">
+                        <small *ngIf="!empForm.get('position').valid && empForm.get('position').touched"class="form-text text-danger">Please Enter position.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Enter company name</label>
+                        <input type="text" class="form-control" formControlName="companyname" placeholder="company name">
+                        <small *ngIf="!empForm.get('companyname').valid && empForm.get('companyname').touched"class="form-text text-danger">Please Enter company name.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Enter Salary</label>
+                        <input type="text" class="form-control" formControlName="Salary" placeholder="salary">
+                        <small *ngIf="!empForm.get('Salary').valid && empForm.get('Salary').touched"class="form-text text-danger">Please Enter Salary.</small>
+                    </div>
+
+                    <div class="form-group form-control">
+                        <label>Enter Department</label>
+                        <select class="custom-select" formControlName="dept">
+                            <option value="Design" class=" text-dark">Design</option>
+                            <option value= "Development" class=" text-dark">Development</option>
+                            <option value="Development" class=" text-dark">Testing</option>
+                            <option value="Development" class=" text-dark">Finance</option>
+                            <option value="Development" class=" text-dark">Human Resource</option>
+                            <option value="Development" class=" text-dark">Quality Assurance</option>
+                            <option value="Development" class=" text-dark">Marketing</option>
+                            <option value="Development" class=" text-dark">Sales</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2 form-control">
+                        <label>Enter Experience</label>
+                        <select class="custom-select" formControlName="dept">
+                            <option value="Design" class=" text-dark">1</option>
+                            <option value="Development" class=" text-dark">2</option>
+                            <option value="Development" class=" text-dark">3</option>
+                            <option value="Development" class=" text-dark">4</option>
+                            <option value="Development" class=" text-dark">5</option>
+                            <option value="Development" class=" text-dark">6</option>
+                            <option value="Development" class=" text-dark">7</option>
+                            <option value="Development" class=" text-dark">8</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">{{editMode? 'Update Employee' :'Add Employee'}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
